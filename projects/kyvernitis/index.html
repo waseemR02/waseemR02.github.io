@@ -1,0 +1,59 @@
+<!doctype html><html class="dark light"><head><meta charset=UTF-8><meta content="IE=edge" http-equiv=X-UA-Compatible><meta content="width=device-width,initial-scale=1.0" name=viewport><title>
+         Kyvernitis
+        
+    </title><meta content=Kyvernitis property=og:title><meta content="Zephyr Application for R24 to program WeAct Blackpill F401cc as daughter board (for pixhawk)." property=og:description><meta content="Zephyr Application for R24 to program WeAct Blackpill F401cc as daughter board (for pixhawk)." name=description><link href=https://waseemR02.github.io/fonts.css rel=stylesheet><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}}</script><script async id=MathJax-script src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script><link title="Waseem Riaz" href=https://waseemR02.github.io/atom.xml rel=alternate type=application/atom+xml><link href=https://waseemR02.github.io/theme/light.css rel=stylesheet><link href=https://waseemR02.github.io/theme/dark.css id=darkModeStyle rel=stylesheet><link href=https://waseemR02.github.io/main.css media=screen rel=stylesheet><body><div class=content><header><div class=main><a href=https://waseemR02.github.io>Waseem Riaz</a><div class=socials><a class=social href=https://github.com/waseemr02/ rel=me> <img alt=github src=/social_icons/github.svg> </a><a class=social href=https://www.linkedin.com/in/waseem-riaz rel=me> <img alt=linkedin src=/social_icons/linkedin.svg> </a><a class=social href=mailto:waseem.riaz.9999@gmail.com rel=me> <img alt=email src=/social_icons/email.svg> </a></div></div><nav><a href=/posts style=margin-left:.7em>/posts</a><a href=/projects style=margin-left:.7em>/projects</a><a href=/about style=margin-left:.7em>/about</a> | <a href=javascript:void(0) id=dark-mode-toggle onclick=toggleTheme()> <img id=sun-icon src=/feather/sun.svg style=filter:invert(1)> <img id=moon-icon src=/feather/moon.svg> </a><script src=https://waseemR02.github.io/js/themetoggle.js></script></nav></header><main><article><div class=title><div class=page-header>Kyvernitis<span class=primary-color style=font-size:1.6em>.</span></div><div class=meta></div></div><section class=body><h1 id=kyvernitis>Kyvernitis</h1><p><a href=https://github.com/waseemr02/kyvernitis>Github Repo</a><p>Zephyr Application for R24 to program WeAct Blackpill F401cc as daughter board (for pixhawk).<p>Repo contains source files for each subsystem.<h2 id=directory-structure>Directory Structure</h2><pre style=background:#0f1419;color:#bfbab0><code><span>kyvernitis-ws/
+</span><span>│
+</span><span>├── kyvernitis/       │ <== Current Repo
+</span><span>│    ├── bio-arm
+</span><span>│    │    ├── boards
+</span><span>│    │    │   └── app.overlay
+</span><span>│    │    ├── CMakeLists.txt
+</span><span>│    │    ├── Kconfig
+</span><span>│    │    ├── prj.conf
+</span><span>│    │    └── src
+</span><span>│    │        └── main.c
+</span><span>│    ├── sub-system
+</span><span>│    │    ├── ...
+</span><span>│    │
+</span><span>│    ├── dts
+</span><span>│    │   └── bindings
+</span><span>│    │       └── pwm-motors.yaml
+</span><span>│    │       └── ...
+</span><span>│    ├── kyvernitis.c
+</span><span>│    ├── kyvernitis.h
+</span><span>│    ├── scripts
+</span><span>│    │    ├── ...
+</span><span>│    │
+</span><span>│    ├── tests
+</span><span>│    │    ├── ... 
+</span><span>│    │
+</span><span>│    ├── LICENSE
+</span><span>│    ├── README.md
+</span><span>│    ├── west.yml
+</span><span>│    └── zephyr
+</span><span>│        └── module.yml
+</span><span>│        └── Kconfig
+</span><span>│        └── CMakeLists.txt          
+</span><span>│                                   
+</span><span>├── modules/
+</span><span>│   └── lib/
+</span><span>│       └── canard/
+</span><span>│   └── hal/
+</span><span>│       └── ...     
+</span><span>│
+</span><span>└── zephyr/              
+</span><span>    └── west.yml         
+</span><span>                         
+</span></code></pre><h2 id=installation>Installation</h2><p>This application contains a manifest file so it will follow a T2 topology workspace (refer to Zephyr docs)<p><strong>Assuming you have all the dependencies for zephyr development as well as the toolchain from the official release</strong><pre style=background:#0f1419;color:#bfbab0><code><span>mkdir kyvernitis-ws
+</span><span>cd kyvernitis-ws
+</span></code></pre><p>Create and activate virtual environment (can skip this step if you already have one) to install west<pre style=background:#0f1419;color:#bfbab0><code><span>python3 -m venv .venv
+</span><span>source .venv/bin/activate
+</span><span>pip install west
+</span></code></pre><p>Init the workspace with the manifest repo and pull modules from upstream<pre style=background:#0f1419;color:#bfbab0><code><span>west init -m https://github.com/waseemR02/kyvernitis 
+</span><span>west config --global update.narrow true
+</span><span>west update
+</span><span>pip install -r zephyr/scripts/requirements-base.txt
+</span><span>source zephyr/zephyr-env.sh 
+</span></code></pre><p>If everything is installed successfully then it should build any working sub-system without any errors<pre style=background:#0f1419;color:#bfbab0><code><span>west build -p always -o=-j4 -b blackpill_f401cc kyvernitis/bio-arm
+</span></code></pre><h2 id=helpers>Helpers</h2><p>To view init sequence of the application you built, run<pre style=background:#0f1419;color:#bfbab0><code><span>west build -d build -t initlevels
+</span></code></pre></section></article></main></div>
