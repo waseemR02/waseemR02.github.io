@@ -1,6 +1,6 @@
 # The URL the site will be built for
 base_url = "https://waseemR02.github.io"
-title = "Waseem's Portfolio"
+title = "Waseem Riaz"
 build_search_index = true
 compile_sass = true
 generate_feed = true
@@ -24,6 +24,7 @@ menu = [
 
 socials = [
     { name = "github", url = "https://github.com/waseemr02/", icon = "github" },
+    { name = "linkedin", url = "https://www.linkedin.com/in/waseem-riaz", icon = "linkedin"},
     { name = "email", url = "mailto:waseem.riaz.9999@gmail.com", icon = "email"},
 ]
 
